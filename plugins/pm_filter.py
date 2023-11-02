@@ -93,8 +93,8 @@ async def query_status(_, message: Message):
     user_id = message.from_user.id
     user_entry = collection.find_one({'user_id': user_id})
     if user_entry:
-        queries_left = user_entry['queries_left']
-        await message.reply(f"You have {queries_left} queries left for today.")
+	queries_left = user_entry['queries_left']
+	await message.reply(f"You have {queries_left} queries left for today.")
     else:
 	await message.reply(f"You have {query_limit} queries left for today.")
 	    
