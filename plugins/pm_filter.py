@@ -88,16 +88,17 @@ async def g_fil_mod(client, message):
 client = MongoClient(DATABASE_URI)
 db = client['telegram_bot']
 collection = db['query_limits']
+
 @Client.on_message(filters.command(['querystats']))
 async def query_status(_, message: Message):
     user_id = message.from_user.id
     user_entry = collection.find_one({'user_id': user_id})
     if user_entry:
-	queries_left = user_entry['queries_left']
-	await message.reply(f"You have {queries_left} queries left for today.")
+        queries_left = user_entry['queries_left']
+        await message.reply(f"You have {queries_left} queries left for today.")
     else:
-	await message.reply(f"You have {query_limit} queries left for today.")
-	    
+        await message.reply(f"You have {query_limit} queries left for today.")
+
 @Client.on_message(filters.private & filters.text & filters.incoming)
 async def handle_message(client, message):
     if message.text.startswith('/'):
@@ -125,7 +126,7 @@ async def handle_message(client, message):
                 {'$set': {'queries_left': queries_left - 1, 'last_query_time': datetime.now()}}
             )
             kd = await global_filters(client, message)
-            if kd == False:
+            if kd is False:
                 await pm_AutoFilter(client, message)
     else:
         collection.insert_one(
