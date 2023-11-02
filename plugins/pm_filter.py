@@ -3,13 +3,14 @@ import datetime
 import time
 import string
 import random
+from pymongo import MongoClient
 lock = asyncio.Lock()
 from datetime import datetime
 from pyrogram.errors.exceptions.bad_request_400 import MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty
 from Script import script, INST, M_NT_FND, SECOND_VERIFICATION_TEXT, MALIK2, MQTTTM
 import pyrogram
 from database.connections_mdb import active_connection, all_connections, delete_connection, if_active, make_active, make_inactive
-from info import VERIFY_CLOSE, LANGUAGES, VERIFY_LOG, SHORT_URL, SHORT_API, MQTTP, MQTT, INST, ADMINS, AUTH_CHANNEL, AUTH_USERS, CUSTOM_FILE_CAPTION, AUTH_GROUPS, P_TTI_SHOW_OFF, IMDB, SINGLE_BUTTON, PROTECT_CONTENT, \
+from info import VERIFY_CLOSE, query_limit, DATABASE_URI, DATABASE_NAME, LANGUAGES, VERIFY_LOG, SHORT_URL, SHORT_API, MQTTP, MQTT, INST, ADMINS, AUTH_CHANNEL, AUTH_USERS, CUSTOM_FILE_CAPTION, AUTH_GROUPS, P_TTI_SHOW_OFF, IMDB, SINGLE_BUTTON, PROTECT_CONTENT, \
     SPELL_CHECK_REPLY, IMDB_TEMPLATE, IMDB_DELET_TIME, START_MESSAGE, VERIFY, G_FILTER, BUTTON_LOCK, BUTTON_LOCK_TEXT, TUTORIAL_LINK_1, TUTORIAL_LINK_2, LOG_CHANNEL, GRP_LNK, CHNL_LNK
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery, Message
 from pyrogram import Client, filters, enums 
@@ -84,52 +85,55 @@ async def g_fil_mod(client, message):
       else:
           await m.edit("𝚄𝚂𝙴 :- /g_filter on 𝙾𝚁 /g_filter off")
 
-
+client = MongoClient(DATABASE_URI)
+db = client['telegram_bot']
+collection = db['query_limits']
+@Client.on_message(filters.command(['querystats']))
+def query_status(_, message: Message):
+    user_id = message.from_user.id
+    query_limit = 10
+    user_entry = collection.find_one({'user_id': user_id})
+    if user_entry:
+        queries_left = user_entry['queries_left']
+        message.reply(f"You have {queries_left} queries left for today.")
+    else:
+        message.reply(f"You have {query_limit} queries left for today.")
+	    
 @Client.on_message(filters.private & filters.text & filters.chat(AUTH_USERS) if AUTH_USERS else filters.text & filters.private)
 async def pm_filter(client, message):
-    if VERIFY_CLOSE:
-        if G_FILTER:
+    if message.text.startswith('/'):
+        return
+    user_id = message.from_user.id
+    user_entry = collection.find_one({'user_id': user_id})
 
-            user_id = message.from_user.id
-    
-            user_verified = await db.is_user_verified(user_id)
+    if user_entry:
+        queries_left = user_entry['queries_left']
+        last_query_time = user_entry['last_query_time']
+        time_diff = datetime.now() - last_query_time
 
-            is_second_shortener = await db.use_second_shortener(user_id)
+        if time_diff > timedelta(hours=24):
+            queries_left = query_limit
 
-            how_to_download_link = TUTORIAL_LINK_2 if is_second_shortener else TUTORIAL_LINK_1
-
-            if not user_verified or is_second_shortener:
-                verify_id = ''.join(random.choices(string.ascii_uppercase + string.digits, k=7))
-                await db.create_verify_id(user_id, verify_id)
-                buttons = [[InlineKeyboardButton(text="🔹 Click here to Verify 🔹", url=await get_shortlink(f"https://telegram.me/{temp.U_NAME}?start=notcopy_{user_id}_{verify_id}", is_second_shortener, verify_1=not is_second_shortener),),], [InlineKeyboardButton(text="🌀 How to verify 🌀", url=how_to_download_link)]]
-                reply_markup=InlineKeyboardMarkup(buttons)
-                num = 2 if is_second_shortener else 1
-                text = f"""User ID : `{user_id}`
-
-Username : {message.from_user.mention}
-Time : {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
-
-#New_Verify_{num}_User"""
-                await client.send_message(VERIFY_LOG, text)
-                bin_text = SECOND_VERIFICATION_TEXT if is_second_shortener else MALIK2
-                dmb = await message.reply_text(
-                   #photo=(MALIK), #caption=(MALIK2)),
-                    text=(bin_text.format(message.from_user.mention)),
-                    protect_content = True,
-                    reply_markup=reply_markup,
-                    parse_mode=enums.ParseMode.HTML
-                )
-                await asyncio.sleep(120) 
-                await dmb.delete()
-                return
-
+        if queries_left <= 0:
+            reset_time = timedelta(hours=24) - time_diff
+            hours, remainder = divmod(reset_time.seconds, 3600)
+            minutes, seconds = divmod(remainder, 60)
+            reset_message = f"You have reached today's limit of {query_limit} queries. Your limit will be reset after {hours} hours, {minutes} minutes, and {seconds} seconds."
+            await message.reply(reset_message)
+            return
+        else:
+            collection.update_one(
+                {'user_id': user_id},
+                {'$set': {'queries_left': queries_left - 1, 'last_query_time': datetime.now()}}
+            )
             kd = await global_filters(client, message)
             if kd == False:
                 await pm_AutoFilter(client, message)
-        else:
-            await pm_AutoFilter(client, message)
     else:
-        await pm_AutoFilter(client, message)   
+        collection.insert_one(
+            {'user_id': user_id, 'queries_left': query_limit - 1, 'last_query_time': datetime.now()}
+        )
+ 
 
 @Client.on_message(filters.group & filters.text & filters.incoming)
 async def give_filter(client, message):
