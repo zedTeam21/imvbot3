@@ -96,40 +96,41 @@ def query_status(_, message: Message):
         queries_left = user_entry['queries_left']
         message.reply(f"You have {queries_left} queries left for today.")
     else:
-        message.reply(f"You have {query_limit} queries left for today.")
+	message.reply(f"You have {query_limit} queries left for today.")
 	    
-@Client.on_message(filters.private & filters.text & filters.chat(AUTH_USERS) if AUTH_USERS else filters.text & filters.private)
-async def pm_filter(client, message):
-	if message.text.startswith('/'):
-		return
-	user_id = message.from_user.id
-	user_entry = collection.find_one({'user_id': user_id})
-	if user_entry:
-		queries_left = user_entry['queries_left']
-		last_query_time = user_entry['last_query_time']
-		time_diff = datetime.now() - last_query_time
-		if time_diff > timedelta(hours=24):
-			queries_left = query_limit
-		if queries_left <= 0:
-			reset_time = timedelta(hours=24) - time_diff
-			hours, remainder = divmod(reset_time.seconds, 3600)
-			minutes, seconds = divmod(remainder, 60)
-			reset_message = f"You have reached today's limit of {query_limit} queries. Your limit will be reset after {hours} hours, {minutes} minutes, and {seconds} seconds."
-			await message.reply(reset_message)
-			return
-		else:
-			collection.update_one(
-				{'user_id': user_id},
-				{'$set': {'queries_left': queries_left - 1, 'last_query_time': datetime.now()}}
-			)
-			kd = await global_filters(client, message)
-			if kd == False:
-				await pm_AutoFilter(client, message)
-	else:
-		collection.insert_one(
-			{'user_id': user_id, 'queries_left': query_limit - 1, 'last_query_time': datetime.now()}
-		)
- 
+@Client.on_message(filters.private & filters.text & filters.incoming)
+async def handle_message(client, message):
+    if message.text.startswith('/'):
+        return
+    user_id = message.from_user.id
+    user_entry = collection.find_one({'user_id': user_id})
+    if user_entry:
+        queries_left = user_entry['queries_left']
+        last_query_time = user_entry['last_query_time']
+        time_diff = datetime.now() - last_query_time
+
+        if time_diff > timedelta(hours=24):
+            queries_left = query_limit
+
+        if queries_left <= 0:
+            reset_time = timedelta(hours=24) - time_diff
+            hours, remainder = divmod(reset_time.seconds, 3600)
+            minutes, seconds = divmod(remainder, 60)
+            reset_message = f"You have reached today's limit of {query_limit} queries. Your limit will be reset after {hours} hours, {minutes} minutes, and {seconds} seconds."
+            await message.reply(reset_message)
+            return
+        else:
+            collection.update_one(
+                {'user_id': user_id},
+                {'$set': {'queries_left': queries_left - 1, 'last_query_time': datetime.now()}}
+            )
+            kd = await global_filters(client, message)
+            if kd == False:
+                await pm_AutoFilter(client, message)
+    else:
+        collection.insert_one(
+            {'user_id': user_id, 'queries_left': query_limit - 1, 'last_query_time': datetime.now()}
+        )
 
 @Client.on_message(filters.group & filters.text & filters.incoming)
 async def give_filter(client, message):
