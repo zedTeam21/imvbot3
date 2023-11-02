@@ -91,7 +91,6 @@ collection = db['query_limits']
 @Client.on_message(filters.command(['querystats']))
 def query_status(_, message: Message):
     user_id = message.from_user.id
-    query_limit = 10
     user_entry = collection.find_one({'user_id': user_id})
     if user_entry:
         queries_left = user_entry['queries_left']
