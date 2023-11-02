@@ -5,7 +5,7 @@ import string
 import random
 from pymongo import MongoClient
 lock = asyncio.Lock()
-from datetime import datetime
+from datetime import datetime, timedelta
 from pyrogram.errors.exceptions.bad_request_400 import MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty
 from Script import script, INST, M_NT_FND, SECOND_VERIFICATION_TEXT, MALIK2, MQTTTM
 import pyrogram
