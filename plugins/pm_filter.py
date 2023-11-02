@@ -89,14 +89,14 @@ client = MongoClient(DATABASE_URI)
 db = client['telegram_bot']
 collection = db['query_limits']
 @Client.on_message(filters.command(['querystats']))
-def query_status(_, message: Message):
+async def query_status(_, message: Message):
     user_id = message.from_user.id
     user_entry = collection.find_one({'user_id': user_id})
     if user_entry:
         queries_left = user_entry['queries_left']
-        message.reply(f"You have {queries_left} queries left for today.")
+        await message.reply(f"You have {queries_left} queries left for today.")
     else:
-	message.reply(f"You have {query_limit} queries left for today.")
+	await message.reply(f"You have {query_limit} queries left for today.")
 	    
 @Client.on_message(filters.private & filters.text & filters.incoming)
 async def handle_message(client, message):
