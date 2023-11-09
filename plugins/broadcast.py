@@ -18,7 +18,7 @@ async def verupikkals(bot, message):
     sts = await message.reply_text(
         text='Broadcasting your messages...'
     )
-    )   
+    
 
 
     start_time = time.time()
