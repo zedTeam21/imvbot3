@@ -84,57 +84,74 @@ async def g_fil_mod(client, message):
           await m.edit("**𝙶𝙻𝙾𝙱𝙰𝙻 𝙳𝙸𝚂𝙰𝙱𝙻𝙴𝙳**")
       else:
           await m.edit("𝚄𝚂𝙴 :- /g_filter on 𝙾𝚁 /g_filter off")
+@Client.on_message(filters.private & filters.text & filters.chat(AUTH_USERS) if AUTH_USERS else filters.text & filters.private)
+async def pm_filter(client, message):
+    if VERIFY_CLOSE:
+        if G_FILTER:
 
-client = MongoClient(DATABASE_URI)
-db = client['telegram_bot']
-collection = db['query_limits']
+            user_id = message.from_user.id
+    
+            user_verified = await db.is_user_verified(user_id)
 
-@Client.on_message(filters.command(['querystats']))
-async def query_status(_, message: Message):
-    user_id = message.from_user.id
-    user_entry = collection.find_one({'user_id': user_id})
-    if user_entry:
-        queries_left = user_entry['queries_left']
-        await message.reply(f"You have {queries_left} queries left for today.")
-    else:
-        await message.reply(f"You have {query_limit} queries left for today.")
+            is_second_shortener = await db.use_second_shortener(user_id)
 
-@Client.on_message(filters.private & filters.text & filters.incoming)
-async def handle_message(client, message):
-    if message.text.startswith('/'):
-        return
-    user_id = message.from_user.id
-    user_entry = collection.find_one({'user_id': user_id})
-    if user_entry:
-        queries_left = user_entry['queries_left']
-        last_query_time = user_entry['last_query_time']
-        time_diff = datetime.now() - last_query_time
+            how_to_download_link = TUTORIAL_LINK_2 if is_second_shortener else TUTORIAL_LINK_1
 
-        if time_diff > timedelta(hours=24):
-            queries_left = query_limit
+            if not user_verified or is_second_shortener:
+                verify_id = ''.join(random.choices(string.ascii_uppercase + string.digits, k=7))
+                await db.create_verify_id(user_id, verify_id)
+                buttons = [[InlineKeyboardButton(text="🔹 Click here to Verify 🔹", url=await get_shortlink(f"https://telegram.me/{temp.U_NAME}?start=notcopy_{user_id}_{verify_id}", is_second_shortener, verify_1=not is_second_shortener),),], [InlineKeyboardButton(text="🌀 How to verify 🌀", url=how_to_download_link)]]
+                reply_markup=InlineKeyboardMarkup(buttons)
+                num = 2 if is_second_shortener else 1
+                text = f"""User ID : `{user_id}`
 
-        if queries_left <= 0:
-            reset_time = timedelta(hours=24) - time_diff
-            hours, remainder = divmod(reset_time.seconds, 3600)
-            minutes, seconds = divmod(remainder, 60)
-            reset_message = f"You have reached today's limit of {query_limit} queries. Your limit will be reset after {hours} hours, {minutes} minutes, and {seconds} seconds."
-            await message.reply(reset_message)
-            return
-        else:
-            collection.update_one(
-                {'user_id': user_id},
-                {'$set': {'queries_left': queries_left - 1, 'last_query_time': datetime.now()}}
-            )
+Username : {message.from_user.mention}
+Time : {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+
+#New_Verify_{num}_User"""
+                await client.send_message(VERIFY_LOG, text)
+                bin_text = SECOND_VERIFICATION_TEXT if is_second_shortener else MALIK2
+                dmb = await message.reply_text(
+                   #photo=(MALIK), #caption=(MALIK2)),
+                    text=(bin_text.format(message.from_user.mention)),
+                    protect_content = True,
+                    reply_markup=reply_markup,
+                    parse_mode=enums.ParseMode.HTML
+                )
+                await asyncio.sleep(120) 
+                await dmb.delete()
+                return
+
             kd = await global_filters(client, message)
-            if kd is False:
+            if kd == False:
                 await pm_AutoFilter(client, message)
+        else:
+            await pm_AutoFilter(client, message)
     else:
-        collection.insert_one(
-            {'user_id': user_id, 'queries_left': query_limit - 1, 'last_query_time': datetime.now()}
-        )
-	kd = await global_filters(client, message)
-        if kd == False:
-            await auto_filter(client, message)
+        await pm_AutoFilter(client, message) 
+@Client.on_message(filters.group & filters.text & filters.incoming)
+async def give_filter(client, message):
+    if G_FILTER:
+        if G_MODE.get(str(message.chat.id)) == "False":
+            return 
+        else:
+
+            kd = await global_filters(client, message)
+        if kd == False:          
+            k = await manual_filters(client, message)
+            if k == False:
+                if FILTER_MODE.get(str(message.chat.id)) == "False":
+                    return
+                else:
+                    await auto_filter(client, message)   
+    else:
+        k = await manual_filters(client, message)
+        if k == False:
+            if FILTER_MODE.get(str(message.chat.id)) == "False":
+                return
+            else:
+                await auto_filter(client, message)   
+
 
 @Client.on_callback_query(filters.regex(r"^pmnext"))
 async def pm_next_page(bot, query):
