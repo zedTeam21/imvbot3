@@ -133,8 +133,8 @@ async def handle_message(client, message):
             {'user_id': user_id, 'queries_left': query_limit - 1, 'last_query_time': datetime.now()}
         )
 	kd = await global_filters(client, message)
-        if kd == False:
-            await auto_filter(client, message)
+	if kd is False:
+		await pm_Auto_filter(client, message)
 
 @Client.on_callback_query(filters.regex(r"^pmnext"))
 async def pm_next_page(bot, query):
