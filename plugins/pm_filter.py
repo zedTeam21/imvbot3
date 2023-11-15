@@ -133,24 +133,24 @@ Time : {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
 async def give_filter(client, message):
     if G_FILTER:
         if G_MODE.get(str(message.chat.id)) == "False":
-            return 
+            return
         else:
-
             kd = await global_filters(client, message)
-        if kd == False:          
+
+        if kd is False:
             k = await manual_filters(client, message)
-            if k == False:
+            if k is False:
                 if FILTER_MODE.get(str(message.chat.id)) == "False":
                     return
                 else:
-                    await auto_filter(client, message)   
+                    await auto_filter(client, message)
     else:
         k = await manual_filters(client, message)
-        if k == False:
+        if k is False:
             if FILTER_MODE.get(str(message.chat.id)) == "False":
                 return
             else:
-                await auto_filter(client, message)   
+                await auto_filter(client, message)
 
 
 @Client.on_callback_query(filters.regex(r"^pmnext"))
