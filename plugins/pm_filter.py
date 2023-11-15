@@ -100,8 +100,7 @@ async def query_status(_, message: Message):
         await message.reply(f"You have {query_limit} queries left for today.")
 
 @Client.on_message(filters.private & filters.text & filters.incoming)
-async def handle_message(client, message):
-    if message.text.startswith('/'):
+async def handle_message(client, message):    if message.text.startswith('/'):
         return
     user_id = message.from_user.id
     user_entry = collection.find_one({'user_id': user_id})
