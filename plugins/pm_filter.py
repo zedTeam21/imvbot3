@@ -100,11 +100,13 @@ async def query_status(_, message: Message):
         await message.reply(f"You have {query_limit} queries left for today.")
 
 @Client.on_message(filters.private & filters.text & filters.incoming)
-async def handle_message(client, message):    
-if message.text.startswith('/'):
-	return
+async def handle_message(client, message):
+    if message.text.startswith('/'):
+        return
+
     user_id = message.from_user.id
     user_entry = collection.find_one({'user_id': user_id})
+
     if user_entry:
         queries_left = user_entry['queries_left']
         last_query_time = user_entry['last_query_time']
@@ -132,9 +134,10 @@ if message.text.startswith('/'):
         collection.insert_one(
             {'user_id': user_id, 'queries_left': query_limit - 1, 'last_query_time': datetime.now()}
         )
-	kd = await global_filters(client, message)
-	if kd is False:
-		await pm_Auto_filter(client, message)
+    
+    kd = await global_filters(client, message)
+    if kd is False:
+        await pm_Auto_filter(client, message)
 
 @Client.on_callback_query(filters.regex(r"^pmnext"))
 async def pm_next_page(bot, query):
