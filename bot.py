@@ -9,7 +9,8 @@ from utils import temp
 from aiohttp import web
 from plugins import web_server
 from subprocess import call
-
+import schedule 
+import time
 from typing import Union, Optional, AsyncGenerator
 from pyrogram import types
 from datetime import datetime
@@ -88,11 +89,18 @@ class Bot(Client):
                 yield message
                 current += 1
 
-
         
 app = Bot()
-app.run(redeploy_bot, interval=6 * 60 * 60)
+schedule.every(6).hours.do(redeploy_bot)
+def run_scheduled_tasks():
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
+        
 app.start()
+
+run_scheduled_tasks()
+
 
 
 
