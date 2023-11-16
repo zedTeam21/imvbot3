@@ -8,7 +8,7 @@ from info import SESSION, API_ID, API_HASH, BOT_TOKEN, LOG_STR, LOG_CHANNEL, POR
 from utils import temp
 from aiohttp import web
 from plugins import web_server
-
+from subprocess import call
 
 from typing import Union, Optional, AsyncGenerator
 from pyrogram import types
@@ -23,6 +23,11 @@ logging.getLogger("pyrogram").setLevel(logging.ERROR)
 logging.getLogger("cinemagoer").setLevel(logging.ERROR)
 LOGGER = logging.getLogger(__name__)
 TIMEZONE = (os.environ.get("TIMEZONE", "Asia/Kolkata"))
+
+def redeploy_bot():
+    print("Redeploying the bot...")    
+    os.system("heroku ps:restart -a imrobot2-7270bc647d62")
+
 class Bot(Client):
 
     def __init__(self):
@@ -86,8 +91,8 @@ class Bot(Client):
 
         
 app = Bot()
-app.run()
-
+app.run(redeploy_bot, interval=6 * 60 * 60)
+app.start()
 
 
 
