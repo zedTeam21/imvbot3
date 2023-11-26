@@ -8,7 +8,8 @@ from info import SESSION, API_ID, API_HASH, BOT_TOKEN, LOG_STR, LOG_CHANNEL, POR
 from utils import temp
 from aiohttp import web
 from plugins import web_server
-from subprocess import call
+
+
 from typing import Union, Optional, AsyncGenerator
 from pyrogram import types
 from datetime import datetime
@@ -22,9 +23,6 @@ logging.getLogger("pyrogram").setLevel(logging.ERROR)
 logging.getLogger("cinemagoer").setLevel(logging.ERROR)
 LOGGER = logging.getLogger(__name__)
 TIMEZONE = (os.environ.get("TIMEZONE", "Asia/Kolkata"))
-
-
-
 class Bot(Client):
 
     def __init__(self):
@@ -85,11 +83,10 @@ class Bot(Client):
                 yield message
                 current += 1
 
+
         
 app = Bot()
-app.start()
-
-
+app.run()
 
 
 
