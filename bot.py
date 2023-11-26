@@ -9,7 +9,6 @@ from utils import temp
 from aiohttp import web
 from plugins import web_server
 from subprocess import call
-import schedule 
 import time
 from typing import Union, Optional, AsyncGenerator
 from pyrogram import types
