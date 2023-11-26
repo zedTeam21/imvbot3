@@ -25,9 +25,7 @@ logging.getLogger("cinemagoer").setLevel(logging.ERROR)
 LOGGER = logging.getLogger(__name__)
 TIMEZONE = (os.environ.get("TIMEZONE", "Asia/Kolkata"))
 
-def redeploy_bot():
-    print("Redeploying the bot...")    
-    os.system("heroku ps:restart -a imrobot2-7270bc647d62")
+
 
 class Bot(Client):
 
@@ -91,15 +89,8 @@ class Bot(Client):
 
         
 app = Bot()
-schedule.every(6).hours.do(redeploy_bot)
-def run_scheduled_tasks():
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
-        
 app.start()
 
-run_scheduled_tasks()
 
 
 
