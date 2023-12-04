@@ -7,7 +7,7 @@ async def photo(client: Client, message: Message):
     try:
         await client.send_message(
             chat_id=message.chat.id,
-            text="Select your required mode from below",
+            text="Checkout more useful bots by @server_z",
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
