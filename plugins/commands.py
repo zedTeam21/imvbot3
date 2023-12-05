@@ -1,4 +1,4 @@
-# @sahid_malik
+
 from datetime import datetime
 import string
 import pytz
@@ -66,15 +66,14 @@ Time : {datetime.now(tz=ist_timezone).strftime('%Y-%m-%d %H:%M:%S')}
                     InlineKeyboardButton('CHANNEL', url=CHNL_LNK),
                     InlineKeyboardButton('GROUP', url=GRP_LNK)
                 ],[
-                    InlineKeyboardButton('REQUEST', url='https://t.me/RequestiMoviesBot'),
-                    InlineKeyboardButton('SEARCH INLINE', switch_inline_query_current_chat='')
+                    InlineKeyboardButton('REQUEST', url='https://t.me/RequestiMoviesBot')
                 ],[
-                    InlineKeyboardButton('⚠️ JOIN OUR BACKUP CHANNEL ⚠️', url='https://t.me/IMoviesRobot_backup'),
+                    InlineKeyboardButton('⚠️ JOIN OUR BACKUP CHANNEL ⚠️', url='https://t.me/GustavoRobot_backup'),
                 ],[
                     InlineKeyboardButton('WATCH ANY ANIME 💮', url='https://t.me/IANIMEHUB'),
                     InlineKeyboardButton('MORE 🤖', url='https://t.me/BESTBOTSTG')
                   ],[
-                    InlineKeyboardButton('HOW TO USE THIS BOT ⚙️', url='https://t.me/iMoviesRobot_channel/114')
+                    InlineKeyboardButton('HOW TO USE THIS BOT ⚙️', url='https://t.me/GustavoRobot_channel/4')
                   ]]
 	    
         await message.reply(START_MESSAGE.format(user=message.from_user.mention if message.from_user else message.chat.title, bot=temp.B_LINK), reply_markup=InlineKeyboardMarkup(buttons), disable_web_page_preview=True)                    
@@ -94,16 +93,16 @@ Time : {datetime.now(tz=ist_timezone).strftime('%Y-%m-%d %H:%M:%S')}
                     InlineKeyboardButton('CHANNEL', url=CHNL_LNK),
                     InlineKeyboardButton('GROUP', url=GRP_LNK)
                 ],[
-                    InlineKeyboardButton('REQUEST', url='https://t.me/RequestiMoviesBot'),
-                    InlineKeyboardButton('SEARCH INLINE', switch_inline_query_current_chat='')
+                    InlineKeyboardButton('REQUEST', url='https://t.me/RequestiMoviesBot')
                 ],[
-                    InlineKeyboardButton('⚠️ JOIN OUR BACKUP CHANNEL ⚠️', url='https://t.me/IMoviesRobot_backup'),
+                    InlineKeyboardButton('⚠️ JOIN OUR BACKUP CHANNEL ⚠️', url='https://t.me/GustavoRobot_backup'),
                 ],[
                     InlineKeyboardButton('WATCH ANY ANIME 💮', url='https://t.me/IANIMEHUB'),
                     InlineKeyboardButton('MORE 🤖', url='https://t.me/BESTBOTSTG')
                   ],[
-                    InlineKeyboardButton('HOW TO USE THIS BOT ⚙️', url='https://t.me/iMoviesRobot_channel/114')
+                    InlineKeyboardButton('HOW TO USE THIS BOT ⚙️', url='https://t.me/GustavoRobot_channel/4')
                   ]]
+        
         reply_markup = InlineKeyboardMarkup(buttons)
         await message.reply_photo(
             photo=random.choice(PICS),
@@ -147,15 +146,14 @@ Time : {datetime.now(tz=ist_timezone).strftime('%Y-%m-%d %H:%M:%S')}
                     InlineKeyboardButton('CHANNEL', url=CHNL_LNK),
                     InlineKeyboardButton('GROUP', url=GRP_LNK)
                 ],[
-                    InlineKeyboardButton('REQUEST', url='https://t.me/RequestiMoviesBot'),
-                    InlineKeyboardButton('SEARCH INLINE', switch_inline_query_current_chat='')
+                    InlineKeyboardButton('REQUEST', url='https://t.me/RequestiMoviesBot')
                 ],[
-                    InlineKeyboardButton('⚠️ JOIN OUR BACKUP CHANNEL ⚠️', url='https://t.me/IMoviesRobot_backup'),
+                    InlineKeyboardButton('⚠️ JOIN OUR BACKUP CHANNEL ⚠️', url='https://t.me/GustavoRobot_backup'),
                 ],[
                     InlineKeyboardButton('WATCH ANY ANIME 💮', url='https://t.me/IANIMEHUB'),
                     InlineKeyboardButton('MORE 🤖', url='https://t.me/BESTBOTSTG')
                   ],[
-                    InlineKeyboardButton('HOW TO USE THIS BOT ⚙️', url='https://t.me/iMoviesRobot_channel/114')
+                    InlineKeyboardButton('HOW TO USE THIS BOT ⚙️', url='https://t.me/GustavoRobot_channel/4')
                   ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await message.reply_photo(
@@ -770,7 +768,3 @@ async def deletemultiplefiles(bot, message):
         reply_markup=InlineKeyboardMarkup(btn),
         parse_mode=enums.ParseMode.HTML
     )
-
-
-
-
