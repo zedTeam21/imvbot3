@@ -95,9 +95,9 @@ async def query_status(_, message: Message):
     user_entry = collection.find_one({'user_id': user_id})
     if user_entry:
         queries_left = user_entry['queries_left']
-        await message.reply(f"You have {queries_left} queries left for today.")
+        await message.reply(f"You have {queries_left} queries left for today.\n Details: t.me/GustavoRobot_channel/4")
     else:
-        await message.reply(f"You have {query_limit} queries left for today.")
+        await message.reply(f"You have {query_limit} queries left for today.\n Details: t.me/GustavoRobot_channel/4")
 
 @Client.on_message(filters.private & filters.text & filters.incoming)
 async def handle_message(client, message):
@@ -119,7 +119,8 @@ async def handle_message(client, message):
             reset_time = timedelta(hours=24) - time_diff
             hours, remainder = divmod(reset_time.seconds, 3600)
             minutes, seconds = divmod(remainder, 60)
-            reset_message = f"You have reached today's limit of {query_limit} queries. Your limit will be reset after {hours} hours, {minutes} minutes, and {seconds} seconds."
+            reset_message = f"You have reached today's limit of {query_limit} queries (searches). Your limit will be reset after {hours} hours, {minutes} minutes, and {seconds} seconds.\n Details: t.me/GustavoRobot_channel/4"
+	
             await message.reply(reset_message)
             return
         else:
