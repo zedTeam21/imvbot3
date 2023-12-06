@@ -1852,16 +1852,16 @@ async def pm_AutoFilter(client, msg, pmspoll=False):
         except (MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty):
             pic = imdb.get('poster')
             poster = pic.replace('.jpg', "._V1_UX360.jpg")
-            hmm = await message.reply_photo(photo="https://telegra.ph/file/9a86852df9e70951217cd.png", caption=cap, quote=1, reply_markup=InlineKeyboardMarkup(btn))           
+            hmm = await message.reply_text(text=cap, quote=1, reply_markup=InlineKeyboardMarkup(btn))           
             await asyncio.sleep(IMDB_DELET_TIME)
             await hmm.delete()            
         except Exception as e:
             logger.exception(e)
-            fek = await message.reply_photo(photo="https://telegra.ph/file/9a86852df9e70951217cd.png", caption=cap, quote=1, reply_markup=InlineKeyboardMarkup(btn))
+            fek = await message.reply_text(text=cap, quote=1, reply_markup=InlineKeyboardMarkup(btn))
             await asyncio.sleep(IMDB_DELET_TIME)
             await fek.delete()
     else:
-        fuk = await message.reply_photo(photo="https://telegra.ph/file/9a86852df9e70951217cd.png", caption=cap, quote=1, reply_markup=InlineKeyboardMarkup(btn))
+        fuk = await message.reply_text(text=cap, quote=1, reply_markup=InlineKeyboardMarkup(btn))
         await asyncio.sleep(IMDB_DELET_TIME)
         await fuk.delete()        
     if pmspoll:
