@@ -52,14 +52,14 @@ DATABASE_URI = environ.get('DATABASE_URI', "")
 DATABASE_NAME = environ.get('DATABASE_NAME', "Rajappan")
 COLLECTION_NAME = environ.get('COLLECTION_NAME', 'Telegram_files')
 
-#maximum search result buttos count in number#
+#maximum search result buttons count in number 
 MAX_RIST_BTNS = int(environ.get('MAX_RIST_BTNS', "10"))
-START_MESSAGE = environ.get('START_MESSAGE', '<b>👋HELLO {user}\n\n MY NAME IS {bot},\n I CAN PROVIDE MOVIES, JUST SEND ME THE NAME OF MOVIE</b>')
+START_MESSAGE = environ.get('START_MESSAGE', '<b>👋HELLO {user}\n\n MY NAME IS {bot},\n I CAN PROVIDE YOU MOVIES, WEB SERIES AND MUCH MORE 😉 \n JUST SEND ME THE NAME 🎥 </b>')
 BUTTON_LOCK_TEXT = environ.get("BUTTON_LOCK_TEXT", "⚠️ 𝙃𝙚𝙮 {query}! 𝙏𝙝𝙖𝙩'𝙨 𝙉𝙤𝙩 𝙁𝙤𝙧 𝙔𝙤𝙪. 𝙋𝙡𝙚𝙖𝙨𝙚 𝙍𝙚𝙦𝙪𝙚𝙨𝙩 𝙔𝙤𝙪𝙧 𝙊𝙬𝙣")
 FORCE_SUB_TEXT = environ.get('FORCE_SUB_TEXT', '𝑱𝒐𝒊𝒏 𝑶𝒖𝒓 𝑼𝒑𝒅𝒂𝒕𝒆𝒔 𝑪𝒉𝒂𝒏𝒏𝒆𝒍 𝑻𝒐 𝑼𝒔𝒆 𝑻𝒉𝒊𝒔 𝑩𝒐𝒕!')
 RemoveBG_API = environ.get("RemoveBG_API", "")
 WELCOM_PIC = environ.get("WELCOM_PIC", "")
-WELCOM_TEXT = environ.get("WELCOM_TEXT", "Hi {user}\n Welcome to {chat}")
+WELCOM_TEXT = environ.get("WELCOM_TEXT", "Hello {user}\n Welcome to {chat}")
 
 G_FILTER = bool(environ.get("G_FILTER", True))
 BUTTON_LOCK = bool(environ.get("BUTTON_LOCK", False))
