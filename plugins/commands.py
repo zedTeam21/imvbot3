@@ -56,7 +56,7 @@ Time : {datetime.now(tz=ist_timezone).strftime('%Y-%m-%d %H:%M:%S')}
         dmm = await m.reply_photo(
         photo=(MALIK5), 
         caption=(txt.format(message.from_user.mention)), 
-        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("➡️ JOIN THIS CHANNEL ⬅️",url="http://t.me/IMoviesRobot_channel"),]]),parse_mode=enums.ParseMode.HTML)#"You are now verified for next 24 hours. Continue asking movies")
+        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("➡️ JOIN THIS CHANNEL ⬅️",url="http://t.me/GustavoRobot_Channel"),]]),parse_mode=enums.ParseMode.HTML)#"You are now verified for next 24 hours. Continue asking movies")
         return
         
     if message.chat.type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
@@ -137,20 +137,19 @@ Time : {datetime.now(tz=ist_timezone).strftime('%Y-%m-%d %H:%M:%S')}
         return
     if len(message.command) == 2 and message.command[1] in ["subscribe", "error", "okay", "help"]:
         buttons = [[
-                    InlineKeyboardButton('ADD ME TO YOUR GROUP', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
+                    InlineKeyboardButton('ADD TO YOUR GROUP', url='http://t.me/Imoviesrobot?startgroup=true')
                 ],[
-                    InlineKeyboardButton('CHANNEL', url=CHNL_LNK),
-                    InlineKeyboardButton('GROUP', url=GRP_LNK)
+                    InlineKeyboardButton('CHANNEL', url='T.ME/GustavoRobot_Channel'),
+                    InlineKeyboardButton('GROUP', url='T.ME/imoviesRobot_group')
                 ],[
-                    InlineKeyboardButton('REQUEST', url='https://t.me/RequestiMoviesBot')
+                    InlineKeyboardButton('REQUEST', url='https://t.me/RequestiMoviesBot'),
+                    InlineKeyboardButton('MAIN 🤖📽️',  url='https://t.me/iMoviesRoBot')
                 ],[
                     InlineKeyboardButton('⚠️ JOIN OUR BACKUP CHANNEL ⚠️', url='https://t.me/GustavoRobot_backup'),
                 ],[
-                    InlineKeyboardButton('WATCH ANY ANIME 💮', url='https://t.me/IANIMEHUB'),
-                    InlineKeyboardButton('MORE 🤖', url='https://t.me/BESTBOTSTG')
-                  ],[
-                    InlineKeyboardButton('HOW TO USE THIS BOT ⚙️', url='https://t.me/GustavoRobot_channel/4')
+                    InlineKeyboardButton('HOW TO USE THIS BOT ⚙️', url='https://t.me/GustavoRobot_Channel/4')
                   ]]
+	    
         reply_markup = InlineKeyboardMarkup(buttons)
         await message.reply_photo(
             photo=random.choice(PICS),
