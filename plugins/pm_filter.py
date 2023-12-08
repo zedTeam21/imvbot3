@@ -95,9 +95,9 @@ async def query_status(_, message: Message):
     user_entry = collection.find_one({'user_id': user_id})
     if user_entry:
         queries_left = user_entry['queries_left']
-        await message.reply(f"You have {queries_left} queries left for today.\n Details: t.me/GustavoRobot_channel/4")
+        await message.reply(f"You have {queries_left} queries left for today.\n Details: t.me/GustavoRobot_channel/4", disable_web_page_preview=True)
     else:
-        await message.reply(f"You have {query_limit} queries left for today.\n Details: t.me/GustavoRobot_channel/4")
+        await message.reply(f"You have {query_limit} queries left for today.\n Details: t.me/GustavoRobot_channel/4", disable_web_page_preview=True)
 
 @Client.on_message(filters.private & filters.text & filters.incoming)
 async def handle_message(client, message):
@@ -119,9 +119,9 @@ async def handle_message(client, message):
             reset_time = timedelta(hours=24) - time_diff
             hours, remainder = divmod(reset_time.seconds, 3600)
             minutes, seconds = divmod(remainder, 60)
-            reset_message = f"You have reached today's limit of {query_limit} queries (searches). Your limit will be reset after {hours} hours, {minutes} minutes, and {seconds} seconds.\n Details: t.me/GustavoRobot_channel/4"
+            reset_message = f"Hold on! ⚠️ You have reached today's limit of {query_limit} queries (searches).\n\n🎯Your limit will be reset after {hours} hours, {minutes} minutes, and {seconds} seconds.\n➡️Details: t.me/GustavoRobot_channel/4 "
 	
-            await message.reply(reset_message)
+            await message.reply(reset_message, disable_web_page_preview=True)
             return
         else:
             collection.update_one(
@@ -470,7 +470,7 @@ async def filter_languages_cb_handler(client: Client, query: CallbackQuery):
         )
     else:
         btn.insert(0, [
-             InlineKeyboardButton("⚡How to Download⚡", url="https://t.me/cinemica/71")
+             InlineKeyboardButton("⚡How to Download⚡", url="https://t.me/imoviesrobot")
         ]) 
         btn.insert(0, 
             [
@@ -1838,7 +1838,7 @@ async def pm_AutoFilter(client, msg, pmspoll=False):
             **locals()
         )
     else:
-        cap = f"✅ 𝙎𝙚𝙖𝙧𝙘𝙝 𝙨𝙪𝙘𝙘𝙚𝙨𝙨𝙛𝙪𝙡 \n🔍 𝙃𝙚𝙧𝙚 𝙞𝙨 𝙬𝙝𝙖𝙩 𝙄'𝙫𝙚 𝙛𝙤𝙪𝙣𝙙 𝙛𝙤𝙧 𝙮𝙤𝙪𝙧 𝙦𝙪𝙚𝙧𝙮 {search}\n🔲 𝙅𝙪𝙨𝙩 𝙘𝙡𝙞𝙘𝙠 𝙤𝙣 𝙩𝙝𝙚 𝙗𝙪𝙩𝙩𝙤𝙣𝙨 𝙗𝙚𝙡𝙤𝙬 𝙩𝙤 𝙜𝙚𝙩 𝙩𝙝𝙚 𝙛𝙞𝙡𝙚 ⬇"
+        cap = f"<b><i>✅ Search Successful \n🔍 Here is what i've found for {search}\n🔲Click the relevant button below to get the file⬇</i></b>"
     if imdb and imdb.get('poster'):
         try:
             hehe = await message.reply_photo(photo=imdb.get('poster'), caption=cap, quote=1, reply_markup=InlineKeyboardMarkup(btn))
