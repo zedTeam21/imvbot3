@@ -1838,7 +1838,7 @@ async def pm_AutoFilter(client, msg, pmspoll=False):
             **locals()
         )
     else:
-        cap = f"<b><i>✅ Search Successful \n🔍 Here is what i've found for {search}\n🔲Click the relevant button below to get the file⬇</i></b>"
+        cap = f"<b><i>✅ Search Successful \n🔍 Here is what I've found for {search}\n🔲Click the relevant button below to get the file⬇</i></b>"
     if imdb and imdb.get('poster'):
         try:
             hehe = await message.reply_photo(photo=imdb.get('poster'), caption=cap, quote=1, reply_markup=InlineKeyboardMarkup(btn))
