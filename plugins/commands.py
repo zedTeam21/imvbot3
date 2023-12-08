@@ -63,7 +63,7 @@ Time : {datetime.now(tz=ist_timezone).strftime('%Y-%m-%d %H:%M:%S')}
         buttons = [[
                     InlineKeyboardButton('ADD TO YOUR GROUP', url='http://t.me/Imoviesrobot?startgroup=true')
                 ],[
-                    InlineKeyboardButton('CHANNEL', 'T.ME/GustavoRobot_Channel'),
+                    InlineKeyboardButton('CHANNEL', url='T.ME/GustavoRobot_Channel'),
                     InlineKeyboardButton('GROUP', url='T.ME/imoviesRobot_group')
                 ],[
                     InlineKeyboardButton('REQUEST', url='https://t.me/RequestiMoviesBot'),
@@ -88,7 +88,7 @@ Time : {datetime.now(tz=ist_timezone).strftime('%Y-%m-%d %H:%M:%S')}
         buttons = [[
                     InlineKeyboardButton('ADD TO YOUR GROUP', url='http://t.me/Imoviesrobot?startgroup=true')
                 ],[
-                    InlineKeyboardButton('CHANNEL', 'T.ME/GustavoRobot_Channel'),
+                    InlineKeyboardButton('CHANNEL', url='T.ME/GustavoRobot_Channel'),
                     InlineKeyboardButton('GROUP', url='T.ME/imoviesRobot_group')
                 ],[
                     InlineKeyboardButton('REQUEST', url='https://t.me/RequestiMoviesBot'),
