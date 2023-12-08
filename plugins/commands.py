@@ -95,14 +95,11 @@ Time : {datetime.now(tz=ist_timezone).strftime('%Y-%m-%d %H:%M:%S')}
                     InlineKeyboardButton('GROUP', url=GRP_LNK)
                 ],[
                     InlineKeyboardButton('REQUEST', url='https://t.me/RequestiMoviesBot'),
-                    InlineKeyboardButton('SEARCH INLINE', switch_inline_query_current_chat='')
+                    InlineKeyboardButton('2ND 🤖(FAST)',  url='https://t.me/GustavoRobot')
                 ],[
                     InlineKeyboardButton('⚠️ JOIN OUR BACKUP CHANNEL ⚠️', url='https://t.me/IMoviesRobot_backup'),
                 ],[
-                    InlineKeyboardButton('WATCH ANY ANIME 💮', url='https://t.me/IANIMEHUB'),
-                    InlineKeyboardButton('MORE 🤖', url='https://t.me/BESTBOTSTG')
-                  ],[
-                    InlineKeyboardButton('HOW TO USE THIS BOT ⚙️', url='https://t.me/iMoviesRobot_channel/114')
+                    InlineKeyboardButton('HOW TO USE THIS BOT ⚙️', url='https://t.me/iMoviesRobot_channel/11')
                   ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await message.reply_photo(
