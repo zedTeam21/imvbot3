@@ -1107,17 +1107,17 @@ async def cb_handler(client: Client, query: CallbackQuery):
         await query.answer("🤨 Curiosity is a little more, isn't it? 😁", show_alert=True)
     elif query.data == "start":                        
         buttons = [[
-                    InlineKeyboardButton('ADD ME TO YOUR GROUP', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
+                    InlineKeyboardButton('ADD TO YOUR GROUP', url='http://t.me/Imoviesrobot?startgroup=true')
                 ],[
-                    InlineKeyboardButton('CHANNEL', url=CHNL_LNK),
-                    InlineKeyboardButton('GROUP', url=GRP_LNK)
+                    InlineKeyboardButton('CHANNEL', 'T.ME/GustavoRobot_Channel'),
+                    InlineKeyboardButton('GROUP', url='T.ME/imoviesRobot_group')
                 ],[
                     InlineKeyboardButton('REQUEST', url='https://t.me/RequestiMoviesBot'),
-                    InlineKeyboardButton('SEARCH INLINE', switch_inline_query_current_chat='')
+                    InlineKeyboardButton('MAIN 🤖📽️',  url='https://t.me/iMoviesRoBot')
                 ],[
-                    InlineKeyboardButton('⚠️ JOIN OUR BACKUP CHANNEL ⚠️', url='https://t.me/IMoviesRobot_backup'),
+                    InlineKeyboardButton('⚠️ JOIN OUR BACKUP CHANNEL ⚠️', url='https://t.me/GustavoRobot_backup'),
                 ],[
-                    InlineKeyboardButton('HOW TO USE THIS BOT ⚙️', url='https://t.me/iMoviesRobot_channel/11')
+                    InlineKeyboardButton('HOW TO USE THIS BOT ⚙️', url='https://t.me/GustavoRobot_Channel/4')
                   ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await query.message.edit_text(
