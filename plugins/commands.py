@@ -61,19 +61,17 @@ Time : {datetime.now(tz=ist_timezone).strftime('%Y-%m-%d %H:%M:%S')}
         
     if message.chat.type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
         buttons = [[
-                    InlineKeyboardButton('ADD ME TO YOUR GROUP', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
+                    InlineKeyboardButton('ADD TO YOUR GROUP', url='http://t.me/Imoviesrobot?startgroup=true')
                 ],[
-                    InlineKeyboardButton('CHANNEL', url=CHNL_LNK),
-                    InlineKeyboardButton('GROUP', url=GRP_LNK)
+                    InlineKeyboardButton('CHANNEL', 'T.ME/GustavoRobot_Channel'),
+                    InlineKeyboardButton('GROUP', url='T.ME/imoviesRobot_group')
                 ],[
-                    InlineKeyboardButton('REQUEST', url='https://t.me/RequestiMoviesBot')
+                    InlineKeyboardButton('REQUEST', url='https://t.me/RequestiMoviesBot'),
+                    InlineKeyboardButton('MAIN 🤖📽️',  url='https://t.me/iMoviesRoBot')
                 ],[
                     InlineKeyboardButton('⚠️ JOIN OUR BACKUP CHANNEL ⚠️', url='https://t.me/GustavoRobot_backup'),
                 ],[
-                    InlineKeyboardButton('WATCH ANY ANIME 💮', url='https://t.me/IANIMEHUB'),
-                    InlineKeyboardButton('MORE 🤖', url='https://t.me/BESTBOTSTG')
-                  ],[
-                    InlineKeyboardButton('HOW TO USE THIS BOT ⚙️', url='https://t.me/GustavoRobot_channel/4')
+                    InlineKeyboardButton('HOW TO USE THIS BOT ⚙️', url='https://t.me/GustavoRobot_Channel/4')
                   ]]
 	    
         await message.reply(START_MESSAGE.format(user=message.from_user.mention if message.from_user else message.chat.title, bot=temp.B_LINK), reply_markup=InlineKeyboardMarkup(buttons), disable_web_page_preview=True)                    
@@ -88,19 +86,17 @@ Time : {datetime.now(tz=ist_timezone).strftime('%Y-%m-%d %H:%M:%S')}
         await client.send_message(LOG_CHANNEL, script.LOG_TEXT_P.format(message.from_user.id, message.from_user.mention, message.from_user.username, temp.U_NAME))
     if len(message.command) != 2:
         buttons = [[
-                    InlineKeyboardButton('ADD ME TO YOUR GROUP', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
+                    InlineKeyboardButton('ADD TO YOUR GROUP', url='http://t.me/Imoviesrobot?startgroup=true')
                 ],[
-                    InlineKeyboardButton('CHANNEL', url=CHNL_LNK),
-                    InlineKeyboardButton('GROUP', url=GRP_LNK)
+                    InlineKeyboardButton('CHANNEL', 'T.ME/GustavoRobot_Channel'),
+                    InlineKeyboardButton('GROUP', url='T.ME/imoviesRobot_group')
                 ],[
-                    InlineKeyboardButton('REQUEST', url='https://t.me/RequestiMoviesBot')
+                    InlineKeyboardButton('REQUEST', url='https://t.me/RequestiMoviesBot'),
+                    InlineKeyboardButton('MAIN 🤖📽️',  url='https://t.me/iMoviesRoBot')
                 ],[
                     InlineKeyboardButton('⚠️ JOIN OUR BACKUP CHANNEL ⚠️', url='https://t.me/GustavoRobot_backup'),
                 ],[
-                    InlineKeyboardButton('WATCH ANY ANIME 💮', url='https://t.me/IANIMEHUB'),
-                    InlineKeyboardButton('MORE 🤖', url='https://t.me/BESTBOTSTG')
-                  ],[
-                    InlineKeyboardButton('HOW TO USE THIS BOT ⚙️', url='https://t.me/GustavoRobot_channel/4')
+                    InlineKeyboardButton('HOW TO USE THIS BOT ⚙️', url='https://t.me/GustavoRobot_Channel/4')
                   ]]
         
         reply_markup = InlineKeyboardMarkup(buttons)
