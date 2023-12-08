@@ -1122,7 +1122,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
                     InlineKeyboardButton('GROUP', url=GRP_LNK)
                 ],[
                     InlineKeyboardButton('REQUEST', url='https://t.me/RequestiMoviesBot'),
-                    InlineKeyboardButton('SEARCH INLINE', switch_inline_query_current_chat='')
+                    InlineKeyboardButton('2ND 🤖(FAST)',  url='https://t.me/GustavoRobot')
                 ],[
                     InlineKeyboardButton('⚠️ JOIN OUR BACKUP CHANNEL ⚠️', url='https://t.me/IMoviesRobot_backup'),
                 ],[
