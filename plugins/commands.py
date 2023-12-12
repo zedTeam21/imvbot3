@@ -66,7 +66,7 @@ Time : {datetime.now(tz=ist_timezone).strftime('%Y-%m-%d %H:%M:%S')}
                     InlineKeyboardButton('CHANNEL', url='T.ME/GustavoRobot_Channel'),
                     InlineKeyboardButton('GROUP', url='T.ME/imoviesRobot_group')
                 ],[
-                    InlineKeyboardButton('REQUEST', url='https://t.me/RequestiMoviesBot'),
+                    InlineKeyboardButton('MORE', url='https://t.me/bestbotstg/57'),
                     InlineKeyboardButton('MAIN 🤖📽️',  url='https://t.me/iMoviesRoBot')
                 ],[
                     InlineKeyboardButton('⚠️ JOIN OUR BACKUP CHANNEL ⚠️', url='https://t.me/GustavoRobot_backup'),
@@ -91,7 +91,7 @@ Time : {datetime.now(tz=ist_timezone).strftime('%Y-%m-%d %H:%M:%S')}
                     InlineKeyboardButton('CHANNEL', url='T.ME/GustavoRobot_Channel'),
                     InlineKeyboardButton('GROUP', url='T.ME/imoviesRobot_group')
                 ],[
-                    InlineKeyboardButton('REQUEST', url='https://t.me/RequestiMoviesBot'),
+                    InlineKeyboardButton('MORE', url='https://t.me/bestbotstg/57'),
                     InlineKeyboardButton('MAIN 🤖📽️',  url='https://t.me/iMoviesRoBot')
                 ],[
                     InlineKeyboardButton('⚠️ JOIN OUR BACKUP CHANNEL ⚠️', url='https://t.me/GustavoRobot_backup'),
