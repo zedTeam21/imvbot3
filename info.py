@@ -54,7 +54,7 @@ COLLECTION_NAME = environ.get('COLLECTION_NAME', 'Telegram_files')
 
 #maximum search result buttons count in number 
 MAX_RIST_BTNS = int(environ.get('MAX_RIST_BTNS', "10"))
-START_MESSAGE = environ.get('START_MESSAGE', '<b>👋HELLO {user}\n\n MY NAME IS {bot},\n I CAN PROVIDE YOU MOVIES, WEB SERIES AND MUCH MORE 😉 \nJUST SEND ME THE NAME 🎥\n\n USE @GUSTAVOROBOT IF THIS BOT IS SLOW.</b>')
+START_MESSAGE = environ.get('START_MESSAGE', '<b>👋HELLO {user}\n\n MY NAME IS {bot},\n I CAN PROVIDE YOU MOVIES, WEB SERIES AND MUCH MORE 😉 \nJUST SEND ME THE NAME 🎥\n\nUSE @GUSTAVOROBOT IF THIS BOT IS SLOW.</b>')
 BUTTON_LOCK_TEXT = environ.get("BUTTON_LOCK_TEXT", "⚠️ 𝙃𝙚𝙮 {query}! 𝙏𝙝𝙖𝙩'𝙨 𝙉𝙤𝙩 𝙁𝙤𝙧 𝙔𝙤𝙪. 𝙋𝙡𝙚𝙖𝙨𝙚 𝙍𝙚𝙦𝙪𝙚𝙨𝙩 𝙔𝙤𝙪𝙧 𝙊𝙬𝙣")
 FORCE_SUB_TEXT = environ.get('FORCE_SUB_TEXT', '𝑱𝒐𝒊𝒏 𝑶𝒖𝒓 𝑼𝒑𝒅𝒂𝒕𝒆𝒔 𝑪𝒉𝒂𝒏𝒏𝒆𝒍 𝑻𝒐 𝑼𝒔𝒆 𝑻𝒉𝒊𝒔 𝑩𝒐𝒕!')
 RemoveBG_API = environ.get("RemoveBG_API", "")
