@@ -66,6 +66,8 @@ Time : {datetime.now(tz=ist_timezone).strftime('%Y-%m-%d %H:%M:%S')}
                     InlineKeyboardButton('CHANNEL', url='T.ME/GustavoRobot_Channel'),
                     InlineKeyboardButton('GROUP', url='T.ME/imoviesRobot_group')
                 ],[
+                    InlineKeyboardButton('WATCH ANY ANIME 💮', url='https://t.me/IANIMEHUB'),
+                  ],[
                     InlineKeyboardButton('MORE', url='https://t.me/bestbotstg/57'),
                     InlineKeyboardButton('MAIN 🤖📽️',  url='https://t.me/iMoviesRoBot')
                 ],[
@@ -91,6 +93,8 @@ Time : {datetime.now(tz=ist_timezone).strftime('%Y-%m-%d %H:%M:%S')}
                     InlineKeyboardButton('CHANNEL', url='T.ME/GustavoRobot_Channel'),
                     InlineKeyboardButton('GROUP', url='T.ME/imoviesRobot_group')
                 ],[
+                    InlineKeyboardButton('WATCH ANY ANIME 💮', url='https://t.me/IANIMEHUB'),
+                  ],[
                     InlineKeyboardButton('MORE', url='https://t.me/bestbotstg/57'),
                     InlineKeyboardButton('MAIN 🤖📽️',  url='https://t.me/iMoviesRoBot')
                 ],[
