@@ -95,9 +95,9 @@ async def query_status(_, message: Message):
     user_entry = collection.find_one({'user_id': user_id})
     if user_entry:
         queries_left = user_entry['queries_left']
-        await message.reply(f"You have {queries_left} queries left for today.\n Details: t.me/GustavoRobot_channel/4", disable_web_page_preview=True)
+        await message.reply(f"You have {queries_left} queries left for today.\nDetails: t.me/GustavoRobot_channel/4\nSend any name if this message is not refreshed", disable_web_page_preview=True)
     else:
-        await message.reply(f"You have {query_limit} queries left for today.\n Details: t.me/GustavoRobot_channel/4", disable_web_page_preview=True)
+        await message.reply(f"You have {queries_left} queries left for today.\nDetails: t.me/GustavoRobot_channel/4\nSend any name if this message is not refreshed", disable_web_page_preview=True)
 
 @Client.on_message(filters.private & filters.text & filters.incoming)
 async def handle_message(client, message):
