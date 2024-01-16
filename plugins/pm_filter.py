@@ -39,6 +39,9 @@ FILTER_MODE = {}
 G_MODE = {}
 USER_SPELL_CHECK = {}
 
+@Client.on_message(filters.command('start') & filters.private)
+async def star(client, message):
+	await message.reply("👋HELLO\nMY NAME IS iMoviesRobot\nI CAN PROVIDE MOVIES, JUST SEND ME THE NAME OF MOVIE")
 
 @Client.on_message(filters.command('autofilter') & filters.group & admin_fliter)
 async def fil_mod(client, message): 
