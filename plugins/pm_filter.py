@@ -1121,8 +1121,8 @@ async def cb_handler(client: Client, query: CallbackQuery):
                   ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await query.message.edit_text(
-            text=START_MESSAGE.format(user=query.from_user.mention, bot=temp.B_LINK),
-            reply_markup=reply_markup,
+            text="Hello!",
+           
             parse_mode=enums.ParseMode.HTML
         )
     elif query.data == "photo":
